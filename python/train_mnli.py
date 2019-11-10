@@ -296,13 +296,14 @@ load the best checkpoint and get accuracy on the test set. Default setting is to
 """
 
 test = params.train_or_test()
-
+print(f"value of test is:{test}")
 # While test-set isn't released, use dev-sets for testing
 #test_matched = dev_matched
 #test_mismatched = dev_mismatched
 print("ALL RESULTS ON TEST")
 
 if test == False:
+    print("found that test==false")
     classifier.train(training_mnli, training_snli, dev_matched, dev_mismatched, dev_snli)
     logger.Log("Acc on matched multiNLI dev-set: %s" 
         % (evaluate_classifier(classifier.classify, test_matched, FIXED_PARAMETERS["batch_size"]))[0])
@@ -310,7 +311,8 @@ if test == False:
         % (evaluate_classifier(classifier.classify, test_mismatched, FIXED_PARAMETERS["batch_size"]))[0])
     logger.Log("Acc on SNLI test-set: %s" 
         % (evaluate_classifier(classifier.classify, test_snli, FIXED_PARAMETERS["batch_size"]))[0])
-else: 
+else:
+    print("found that test==true")
     results, bylength = evaluate_final(classifier.restore, classifier.classify, 
         [test_matched, test_mismatched, test_snli], FIXED_PARAMETERS["batch_size"])
     logger.Log("Acc on multiNLI matched dev-set: %s" %(results[0]))
