@@ -101,6 +101,12 @@ For example,
 
 With the `test` flag, the `train_mnli.py` script will also generate a CSV of predictions for the unlabaled matched and mismatched test-sets.
 
+
+note:
+bug fix:
+```File "train_mnli.py", line 287, in classify
+    return genres, np.argmax(logits[1:], axis=1), cost
+ ```   
 #### Results for unlabeled test sets,
 To get a CSV of predicted results for unlabeled test sets use `predictions.py`. This script requires the same flags as the training scripts. You must enter the `model_type` and `model_name`, and the path to the saved checkpoint and log files if they are different from the default (the default is set to `../logs` for both paths). 
 
