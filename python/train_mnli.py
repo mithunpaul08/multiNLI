@@ -109,7 +109,9 @@ class modelClassifier:
         indices = range(start_index, end_index)
         premise_vectors = np.vstack([dataset[i]['sentence1_binary_parse_index_sequence'] for i in indices])
         hypothesis_vectors = np.vstack([dataset[i]['sentence2_binary_parse_index_sequence'] for i in indices])
-        genres = [dataset[i]['genre'] for i in indices]
+        genres = []
+        if 'genre' in dataset[0].keys():
+            genres=[dataset[i]['genre'] for i in indices]
         labels = [dataset[i]['label'] for i in indices]
         return premise_vectors, hypothesis_vectors, labels, genres
 
